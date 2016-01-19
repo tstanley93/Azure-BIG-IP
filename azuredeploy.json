@@ -443,11 +443,11 @@
   "outputs": {
     "GUI-URL": {
       "type": "string",
-      "value": "[concat('https://',reference(variables('publicIPID')).dnsSettings.fqdn,':8443')]"
+      "value": "[concat('https://',reference(variables('publicIPID')).dnsSettings.fqdn,':8443',' Increment Port number for additional BIG-IP Devices.')]"
     },
     "SSH-URL": {
       "type": "string",
-      "value": "[concat(reference(variables('publicIPID')).dnsSettings.fqdn,' ',8022)]"
+      "value": "[concat(reference(variables('publicIPID')).dnsSettings.fqdn,' ',8022,' Increment Port number for additional BIG-IP Devices.')]"
     },
     "Documentation": {
       "type": "string",
