@@ -1,4 +1,4 @@
-# Azure-WAF
+# Azure BIG-IP Deployment
 Deploy F5 BIG-IP into Azure  
 
 This will create a new resource group, and inside this new resource group it will configure the following;
@@ -9,7 +9,7 @@ This will create a new resource group, and inside this new resource group it wil
 * Storage Container
 * Public IP Address
 * NIC objects for the F5 WAF devices.
-* F5 WAF Virtual Machine
+* F5 BIG-IP Virtual Machine
 
 The F5 BIG-IP's will be stood up based on the number you choose durning deployment.
 
