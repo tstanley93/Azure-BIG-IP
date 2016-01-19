@@ -74,7 +74,7 @@
     "loadBalancerName": "[concat(parameters('dnsNameForPublicIP'),'-alb')]",
     "availabilitySetName": "[concat(parameters('dnsNameForPublicIP'),'-avset')]",
     "newStorageAccountName": "[concat(parameters('dnsNameForPublicIP'),'stor')]",
-    "wafNamePrefix": "[concat(parameters('dnsNameForPublicIP'),'-waf')]",
+    "bigipNamePrefix": "[concat(parameters('dnsNameForPublicIP'),'-bigip')]",
     "nsgID": "[resourceId('Microsoft.Network/networkSecurityGroups/',concat(parameters('dnsNameForPublicIP'),'-nsg'))]",
     "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('loadBalancerName'))]",
     "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/loadBalancerFrontEnd')]",
@@ -365,7 +365,7 @@
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[concat(variables('wafNamePrefix'),copyindex())]",
+      "name": "[concat(variables('bigipNamePrefix'),copyindex())]",
       "location": "[parameters('location')]",
       "tags": {
         "displayName": "BIG-IPs"
@@ -392,7 +392,7 @@
           "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
-          "computerName": "[concat(variables('wafNamePrefix'),copyindex())]",
+          "computerName": "[concat(variables('bigipNamePrefix'),copyindex())]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
