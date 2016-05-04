@@ -57,6 +57,12 @@
         "description": "Password to login to the Web Applicatin Firewall."
       }
     },
+    "imageURI": {
+      "type": "string",
+      "metadata": {
+        "description": "The URI to the VHD you want to use."
+      }
+    },
     "dnsNameForPublicIP": {
       "type": "string",
       "metadata": {
@@ -193,7 +199,7 @@
               "sourcePortRange": "*",
               "destinationAddressPrefix": "*",
               "destinationPortRange": "443",
-              "protocol": "TCP",
+              "protocol": "Tcp",
               "direction": "Inbound",
               "access": "Allow"
             }
@@ -207,7 +213,7 @@
               "sourcePortRange": "*",
               "destinationAddressPrefix": "*",
               "destinationPortRange": "22",
-              "protocol": "TCP",
+              "protocol": "Tcp",
               "direction": "Inbound",
               "access": "Allow"
             }
@@ -221,7 +227,7 @@
               "sourcePortRange": "*",
               "destinationAddressPrefix": "*",
               "destinationPortRange": "880",
-              "protocol": "TCP",
+              "protocol": "Tcp",
               "direction": "Inbound",
               "access": "Allow"
             }
@@ -235,7 +241,7 @@
               "sourcePortRange": "*",
               "destinationAddressPrefix": "*",
               "destinationPortRange": "8444",
-              "protocol": "TCP",
+              "protocol": "Tcp",
               "direction": "Inbound",
               "access": "Allow"
             }
@@ -322,7 +328,7 @@
         "frontendIPConfiguration": {
           "id": "[variables('frontEndIPConfigID')]"
         },
-        "protocol": "tcp",
+        "protocol": "Tcp",
         "frontendPort": "[copyIndex(8443)]",
         "backendPort": 443,
         "enableFloatingIP": false
@@ -347,7 +353,7 @@
         "frontendIPConfiguration": {
           "id": "[variables('frontEndIPConfigID')]"
         },
-        "protocol": "tcp",
+        "protocol": "Tcp",
         "frontendPort": "[copyIndex(8022)]",
         "backendPort": 22,
         "enableFloatingIP": false
@@ -395,18 +401,16 @@
           "computerName": "[concat(variables('bigipNamePrefix'),copyindex())]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
-        },
+        },      
         "storageProfile": {
-          "imageReference": {
-            "publisher": "f5-networks",
-            "offer": "f5-big-ip",
-            "sku": "f5-bigip-virtual-edition-best-byol",
-            "version": "latest"
-          },
           "osDisk": {
+            "osType": "Linux",
+            "image": {
+              "uri": "parameters('imageURI')"
+            },
             "name": "[concat('osdisk',copyindex())]",
             "vhd": {
-              "uri": "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('newStorageAccountName'),'/osDisk',copyindex(),'.vhd')]"
+              "uri": "[concat('https://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('newStorageAccountName'),'/osDisk',copyindex(),'.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
